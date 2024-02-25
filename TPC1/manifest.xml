@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doc>
+  <meta>
+    <title>TPC 1 EngWeb 2024</title>
+    <author>Fábio Jorge Almeida Cunha a105089</author>
+    <periodo>16/02 a 18/02</periodo>
+  </meta>
+  <resumo>
+    Criação de um site com uma lista de ruas.
+    Criação de páginas com informação relativa à respetiva rua (Rua Direita e Ponte de Guimaraes)
+  </resumo>
+  <lista_resultados>
+    <resultado>
+      <descricao>Criação de um site com a lista de ruas</descricao>
+        <p>Utilização de um script em python para ler o nome das ruas a partir da pasta texto do dataset e, em seguida, geração do código HTML 
+        com uma lista das ruas com links para as páginas de informação.</p>
+    </resultado>
+    <resultado>
+      <descricao>Criação de páginas com informação relativa à respetiva rua</descricao>
+      <p>Criação manual das páginas de informação a partir dos .xml fornecidos. Análise do texto e substituição dos atributos e elementos 
+      para sintaxe HTML conforme julgado mais correto.</p>
+    </resultado>
+  </lista_resultados>
+</doc>
