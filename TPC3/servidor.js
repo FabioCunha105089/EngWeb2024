@@ -7,7 +7,6 @@ http.createServer(function (req, res) {
     var d = new Date().toISOString().substring(0, 16)
     console.log(req.method + " " + req.url + " " + d)
 
-
     if (q.pathname == '/') {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
         res.write(`
@@ -20,7 +19,6 @@ http.createServer(function (req, res) {
         `)
         res.end()
     }
-
     else if (q.pathname == '/filmes') {
         axios.get("http://localhost:3000/filmes?_sort=title")
             .then(dados => {
@@ -41,15 +39,17 @@ http.createServer(function (req, res) {
                 res.end()
             })
     }
-    else if (q.pathname == '/cursos') {
-        axios.get("http://localhost:3000/cursos?_sort=designacao")
+    else if (q.pathname == '/generos') {
+        axios.get("http://localhost:3000/generos?_sort=nome")
             .then(dados => {
                 res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-                res.write('<h1>Lista de cursos</h1>')
-                res.write('<h3><a href="/">Voltar</a></h3>')
-                res.write("<ul>")
-                dados.data.forEach(c => {
-                    res.write(`<li><a href='cursos/${c.id}'>${c.designacao}</a></li>`)
+                res.write(`
+                <head><style>ul { column-count: 4; }</style></head>
+                <h1>Lista de generos</h1>
+                <h3><a href="/">Voltar</a></h3>
+                <ul>`)
+                dados.data.forEach(g => {
+                    res.write(`<li><a href="generos/${g.id}">${g.nome}</a></li>`)
                 });
                 res.write("</ul>")
                 res.end()
@@ -59,15 +59,17 @@ http.createServer(function (req, res) {
                 res.end()
             })
     }
-    else if (q.pathname == '/instrumentos') {
-        axios.get("http://localhost:3000/instrumentos?_sort=text")
+    else if (q.pathname == '/atores') {
+        axios.get("http://localhost:3000/atores?_sort=nome")
             .then(dados => {
                 res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-                res.write('<h1>Lista de instrumentos</h1>')
-                res.write('<h3><a href="/">Voltar</a></h3>')
-                res.write("<ul>")
-                dados.data.forEach(i => {
-                    res.write(`<li>${i.text}</li>`)
+                res.write(`
+                <head><style>ul { column-count: 4; }</style></head>
+                <h1>Lista de atores</h1>
+                <h3><a href="/">Voltar</a></h3>
+                <ul>`)
+                dados.data.forEach(a => {
+                    res.write(`<li><a href="atores/${a.id}">${a.nome}</a></li>`)
                 });
                 res.write("</ul>")
                 res.end()
@@ -84,7 +86,7 @@ http.createServer(function (req, res) {
                 res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
                 f = dados.data[0]
                 res.write(`
-                <h2>${f.title}</h2><br>
+                <h1>${f.title}</h1>
                 <p><b>ID:</b> ${f.id}<br>
                 <b>Ano:</b> ${f.year}<br>
                 <b>Atores:</b> ${f.cast}<br>
@@ -98,19 +100,44 @@ http.createServer(function (req, res) {
                 res.end()
             })
     }
-    else if (q.pathname.match(/\/cursos\/\w+/)) {
-        let id = q.pathname.substring(8)
-        axios.get("http://localhost:3000/cursos?id=" + id)
+    else if (q.pathname.match(/\/generos\/\w+/)) {
+        let id = q.pathname.substring(9)
+        axios.get("http://localhost:3000/generos?id=" + id)
             .then(dados => {
                 res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-                c = dados.data[0]
+                g = dados.data[0]
                 res.write(`
-                <h2>${c.designacao}</h2><br>
-                <p><b>ID:</b> ${c.id}<br>
-                <b>Duracao:</b> ${c.duracao}<br>
-                <b>Instrumento:</b> ${c.instrumento.text}<br>
-                <h3><a href="/cursos">Voltar</a></h3>
+                <head><style>ul { column-count: 4; }</style></head>
+                <h1>${g.nome}</h1>
+                <h3><a href="/generos">Voltar</a></h3>
+                <ul>
                 `)
+                g.filmes.forEach(f => {
+                    res.write(`<li>${f}</li>`)
+                })
+                res.write('</ul>')
+                res.end()
+            })
+            .catch(erro => {
+                res.write("Erro: " + erro)
+                res.end()
+            })
+    }
+    else if (q.pathname.match(/\/atores\/\w+/)) {
+        let id = q.pathname.substring(8)
+        axios.get("http://localhost:3000/atores?id=" + id)
+            .then(dados => {
+                res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+                a = dados.data[0]
+                res.write(`
+                <h1>${a.nome}</h1>
+                <h3><a href="/atores">Voltar</a></h3>
+                <ul>
+                `)
+                a.filmes.forEach(filme => {
+                    res.write(`<li>${filme}</li>`)
+                })
+                res.write('</ul>')
                 res.end()
             })
             .catch(erro => {
@@ -119,7 +146,7 @@ http.createServer(function (req, res) {
             })
     }
     else {
-        res.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'});
+        res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
         res.write('<h1>ERRO: 404 Not Found</h1>');
         res.end();
     }
