@@ -7,20 +7,24 @@ Fábio Jorge Almeida Cunha a105089
 27/02 
 
 ## Resumo
-Dataset de uma escola de música
-Página web com links para listas de alunos, cursos e instrumentos
+Dataset de filmes tratado (filmes agrupados por género e lista de filmes de cada ator)
+Página web com links para listas de filmes, géneros e atores
 Páginas das listas
-Páginas com detalhes de um aluno/curso
+Página com dados de um filme
+Página com filmes de um género
+Página com dados sobre um ator
 
 ## Lista de resultados
 - **'/'** : Página Principal com links para as listas
 
-- **'/alunos'** : Página da lista de alunos
+- **'/filmes'** : Página da lista de filmes
 
-- **'/alunos/xxx'** : Página com detalhes do aluno `xxx`
+- **'/filmes/xxx'** : Página com dados do filme `xxx`
 
-- **'/cursos'** : Página da lista de cursos
+- **'/generos'** : Página da lista de generos
 
-- **'/cursos/xxx'** : Página com detalhes do curso `xxx`
+- **'/generos/xxx'** : Página com filmes do genero `xxx`
 
-- **'/instrumentos'** : Página da lista de instrumentos
+- **'/atores'** : Página da lista de atores
+
+- **'/atores/xxx'** : Página com dados do ator `xxx`
