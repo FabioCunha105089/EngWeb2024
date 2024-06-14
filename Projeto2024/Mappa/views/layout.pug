@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/style2.css')    
+    link(rel='icon', href='/images/favicon.ico', type='image/x-icon')
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.1/codemirror.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.1/theme/material.min.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.1/codemirror.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.1/mode/javascript/javascript.min.js")
+
+
+
+  body
+    .centered-container
+      img(src='/images/vista_panoramica.jpg', alt='Vista Panoramica', class='w3-image')
+
+      nav.w3-bar.w3-light-grey.w3-center.w3-card-4.navbar
+        .navbar-left.w3-bar
+          a.w3-bar-item.w3-button(href='/') Início
+          a.w3-bar-item.w3-button(href='/ruas') Ruas
+          a.w3-bar-item.w3-button(href='/entidades') Entidades
+          a.w3-bar-item.w3-button(href='/lugares') Lugares
+        .navbar-right.w3-bar
+          if isLoggedIn
+            if user.level != "Consumidor"
+              a.w3-bar-item.w3-button(href='/gestao') Gestão
+            a.w3-bar-item.w3-button(href='/conta/perfil') Perfil
+            a.w3-bar-item.w3-button(href='/conta/sair') Terminar Sessão
+          else
+            a.w3-bar-item.w3-button(href='/conta/login') Iniciar sessão
+            a.w3-bar-item.w3-button(href='/conta/registo') Registe-se
+
+
+      block content
+
+      footer.w3-container.w3-center.w3-light-grey.w3-padding-16
+        p Trabalho Prático de Engenharia Web, UMINHO LEI 2024, realizado por Fábio Cunha e Gabriel Araújo

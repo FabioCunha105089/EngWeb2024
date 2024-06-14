@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .profile-container
+    .profile-header
+      h1 Perfil de utilizador
+      img(src=utilizador.foto alt="User Photo" class="profile-photo")
+    .profile-details
+      p
+        strong Username: 
+        span.profile-info #{utilizador._id}
+      p
+        strong Nome: 
+        span.profile-info #{utilizador.name}
+      p
+        strong Email: 
+        span.profile-info #{utilizador.email}
+      p
+        strong Nível: 
+        span.profile-info #{utilizador.level}
+      p
+        strong Sugestões aceites: 
+        span.profile-info #{utilizador.sugestoesAceites}
+      p
+        strong Último acesso: 
+        span.profile-info #{utilizador.lastAccess}
+      p
+        strong Data de registo: 
+        span.profile-info #{utilizador.registrationDate}
+    a(href='/conta/edit').w3-button.w3-teal Editar perfil

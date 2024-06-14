@@ -55,3 +55,4 @@ newDB = {
 
 with open('newDB.json', 'w') as file:
     json.dump(newDB, file, indent=2)
+    

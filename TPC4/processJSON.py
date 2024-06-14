@@ -23,3 +23,4 @@ DB['periodos'] = list(periodosDB.values())
 
 with open('newDB.json', 'w') as file:
     json.dump(DB, file, indent=2)
+
